@@ -1,21 +1,18 @@
 'use client';
-import Image from "next/image";
-import { auth } from "@/lib/firebase";
-import { db } from "@/lib/firebase";
+import Header from './components/header';
+import Login from './login/page';
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet"></link>
 
 export default function Home() {
-
-console.log("Firebase Auth:", auth);
-console.log("Firebase DB:", db);
-
+    console.log("Welcome to Notes");
   return (
-    <div >
-      <h1>NOTES-TAKING-APP</h1>
+    <div>
+      <Header />
+      <h1>Welcome to Notes</h1>
+      <Login/>
       
-    </div>
+      
      
-       
-      
-
+    </div>
   );
 }
