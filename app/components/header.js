@@ -36,7 +36,7 @@ export default function Header() {
           aria-label="User menu"
           className="w-12 h-12 rounded-full bg-pink-300 flex items-center justify-center text-pink-700 font-bold text-lg shadow-md hover:bg-pink-400 transition"
         >
-          {user?.email?.charAt(0).toUpperCase() || 'U'}
+          {user?.email?.charAt(0).toUpperCase() }
         </button>
 
         {/* Dropdown Menu */}

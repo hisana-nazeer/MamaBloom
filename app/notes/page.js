@@ -4,6 +4,7 @@ import Header from "../components/header";
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react"; 
 import { addDoc, collection, Timestamp } from "firebase/firestore";
+import Link from "next/link";
 
 export default function Notes() {
   const [notes, setNotes] = useState('');
@@ -66,9 +67,18 @@ export default function Notes() {
             {loading ? "Adding Note..." : "Add Note"}
           </button>
         </form>
+
         {message && (
           <p className="mt-4 text-center text-pink-600 font-medium">{message}</p>
         )}
+
+        <div className="mt-6 text-center">
+          <Link href="/dashboard">
+            <button className="bg-pink-100 hover:bg-pink-200 text-pink-700 font-semibold py-2 px-4 rounded-lg transition">
+              Go to My Notes
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

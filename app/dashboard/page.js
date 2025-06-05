@@ -4,6 +4,7 @@ import { db } from "@/lib/firebase";
 import { useState, useEffect } from "react";
 import { collection, query, where, orderBy, getDocs, updateDoc, doc, deleteDoc } from "firebase/firestore";
 import Button from "../components/button";
+import Header from "../components/header";
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -67,7 +68,9 @@ export default function Dashboard() {
   };
 
   return (
+    
     <div className="min-h-screen bg-pink-50 px-4 py-6">
+      <Header />
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl text-center font-extrabold text-pink-700 mb-6">🌸 Mom's Memory Keeper</h1>
 
