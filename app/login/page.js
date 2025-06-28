@@ -45,7 +45,7 @@ export default function Login() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
             required
-            className="w-full px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
+            className="w-full text-black px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
           />
           <input
             type="password"
@@ -53,7 +53,7 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
             required
-            className="w-full px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
+            className="w-full text-black px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
           />
           <button
             type="submit"

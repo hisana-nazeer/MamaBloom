@@ -43,7 +43,7 @@ export default function Notes() {
           <input
             type="text"
             placeholder="Enter your title"
-            className="w-full px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
+            className="w-full text-black px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
@@ -51,7 +51,7 @@ export default function Notes() {
 
           <textarea
             placeholder="Enter your note"
-            className="w-full px-4 py-3 border border-pink-300 rounded-lg resize-none h-40 focus:outline-none focus:ring-2 focus:ring-pink-400"
+            className="w-full text-black px-4 py-3 border border-pink-300 rounded-lg resize-none h-40 focus:outline-none focus:ring-2 focus:ring-pink-400"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             required

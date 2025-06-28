@@ -43,7 +43,7 @@ export default function Signup() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
             required
-            className="w-full mb-4 px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
+            className="w-full text-black mb-4 px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
           />
           <input
             type="password"
@@ -51,7 +51,7 @@ export default function Signup() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
             required
-            className="w-full mb-6 px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
+            className="w-full text-black mb-6 px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
           />
           <button
             type="submit"
