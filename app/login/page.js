@@ -25,7 +25,7 @@ export default function Login() {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      router.push('/notes');
+      router.push('/menu');
       console.log("User logged in with Google:", user);
     } catch (error) {
       console.error("Error logging in with Google:", error);
