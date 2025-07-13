@@ -7,6 +7,7 @@ import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 import { db } from "@/lib/firebase";
 import TypingIndicator from "./typingIndicator";
+import CryptoJS from "crypto-js";
 
 export default function Chatbox({ selectedChat }) {
   const [messages, setMessages] = useState([
@@ -18,6 +19,13 @@ export default function Chatbox({ selectedChat }) {
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef(null);
   const [authChecked, setAuthChecked] = useState(false);
+
+  const secretKey = process.env.NEXT_PUBLIC_CHAT_SECRET;
+
+  const encryptMessage= (text) =>{
+    return CryptoJS.AES.encrypt(text, secretKey).toString();
+  }
+ 
 
   useEffect(() => {
     if (user === undefined) {
@@ -102,7 +110,7 @@ export default function Chatbox({ selectedChat }) {
       <div className="w-full max-w-2xl bg-white shadow-2xl rounded-3xl flex flex-col overflow-hidden border border-rose-200">
         {/* Header */}
         <div className="bg-rose-100 text-rose-800 px-6 py-4 text-center text-2xl font-extrabold tracking-wide rounded-t-3xl shadow">
-          🌸 Mama’s Chat Helper
+          🌸 MamaBloom
         </div>
 
         {/* Chat Area */}
