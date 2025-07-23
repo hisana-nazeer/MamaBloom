@@ -17,7 +17,8 @@ export default function Notes() {
     e.preventDefault();
     setLoading(true);
     try {
-      await addDoc(collection(db, "notes"), {
+  
+      await addDoc(collection(db, "notes", uid, 'notes'), {
         title,
         notes,
         createdAt: Timestamp.now(),

@@ -2,11 +2,27 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { openai } from '@/lib/openai';
+import CryptoJS from 'crypto-js';
+import { db }  from '@/lib/firebase';
+import { serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
+
+
+
+const  secretKey = process.env.CHAT_SECRET
+
+function encryptMessage(text) {
+  return CryptoJS.AES.encrypt(text, secretKey).toString()
+}
+
 
 export async function POST(req) {
   try {
-    const { message } = await req.json();
+     // Expect both message and uid to be passed from the client
+    const { message, uid} = await req.json();
     console.log("Received message:", message);
+
+  // Call OpenAI with your custom system prompt and user message
 
     const chatResponse = await openai.chat.completions.create({
       model: 'gpt-4o',
@@ -40,7 +56,27 @@ Reply :<detailed answer>`
     const title = titleMatch?.[1]?.trim() || 'Untitled Chat';
     const reply = replyMatch?.[1]?.trim() || 'Could not generate response';
 
-    
+  //Encrypt the reply
+   const encryptedUserMessage = encryptMessage(message);
+   const encryptedBotReply = encryptMessage(reply);
+   const encryptedTitle = encryptMessage(title);
+
+   // Save the conversation to Firestore under the given uid
+  if (uid) {
+    await addDoc(collection(db, 'users', uid, 'conversations'), {
+      encryptedTitle,
+      messages: [
+        { sender: 'user', text: encryptedUserMessage },
+        { sender: 'bot', text: encryptedBotReply }
+      ],
+      createdAt: serverTimestamp(),
+    });
+  }
+  
+  
+  
+   // Return the plaintext reply to the client for immediate UI display
+
     
     return NextResponse.json(
       { reply, title }

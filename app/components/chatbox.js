@@ -6,6 +6,7 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 import { db } from "@/lib/firebase";
+
 import TypingIndicator from "./typingIndicator";
 import CryptoJS from "crypto-js";
 
@@ -20,11 +21,10 @@ export default function Chatbox({ selectedChat }) {
   const bottomRef = useRef(null);
   const [authChecked, setAuthChecked] = useState(false);
 
-  const secretKey = process.env.NEXT_PUBLIC_CHAT_SECRET;
+ 
 
-  const encryptMessage= (text) =>{
-    return CryptoJS.AES.encrypt(text, secretKey).toString();
-  }
+ 
+
  
 
   useEffect(() => {
@@ -46,8 +46,9 @@ export default function Chatbox({ selectedChat }) {
   }, [messages]);
 
  useEffect(() => {
-  if (selectedChat) {
-    setMessages(selectedChat.messages || []);
+  if (selectedChat?.messages) {
+    
+    setMessages(selectedChat.messages);
   }
 }, [selectedChat]);
 
@@ -55,43 +56,48 @@ export default function Chatbox({ selectedChat }) {
     e.preventDefault();
     if (!input.trim()) return;
 
-    const userMessage = { sender: "user", text: input };
     
 
-    const typingPlaceholder = { sender: "bot", text: "Typing..." };
-    const tempMessages = [...messages, userMessage, typingPlaceholder];
-    setMessages(tempMessages);
+// For UI display, show plain text
+const tempMessages = [
+  ...messages,
+  { sender: "user", text: input },
+  { sender: "bot", text: "Typing..." },
+];
+
+setMessages(tempMessages);
     setInput("");
     setLoading(true);
 
     try {
       // Save user message separately if needed
-
+//Send a plain text message and uid to the API
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({ message: input, uid: user.uid }),
       });
 
       const data = await res.json();
-      const botReply = data.reply || "Hmm, can you say that differently? 😊";
-     
+      const plainBotReply = data.reply || "Hmm, can you say that differently? 😊";
+      
       const chatTitle = data.title || input.trim().split(" ").slice(0, 4).join(" ");
      
+      // const finalMessages = [
+      //   ...tempMessages.slice(0, -1),
+      //   { sender: "bot", text: botReply },
+      // ];
+
       const finalMessages = [
-        ...tempMessages.slice(0, -1),
-        { sender: "bot", text: botReply },
-      ];
+  ...messages,
+  { sender: "user", text: input },
+  { sender: "bot", text: plainBotReply },
+];
 
       // Replace 'Typing...' with real bot reply
       setMessages(finalMessages);
 
-      // Store full chat as a conversation
-      await addDoc(collection(db, "users", user.uid, "conversations"), {
-        title: chatTitle,
-        messages: finalMessages,
-        createdAt: serverTimestamp(),
-      });
+      
     } catch (err) {
       console.error("Error fetching reply:", err);
       setMessages((prev) => [...prev.slice(0, -1)]);
