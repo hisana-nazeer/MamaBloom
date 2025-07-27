@@ -1,63 +1,95 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useRef } from 'react';
-import { useAuth } from '../context/AuthContext';
+import Link from "next/link";
+import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import { Menu, X } from "lucide-react"; // Icons for menu toggle
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
   const { user, handleLogout } = useAuth();
-  const dropdownRef = useRef(null);
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
-  // Close dropdown if clicked outside
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="flex justify-between items-center bg-pink-50 border-b border-pink-300 px-8 py-5 shadow-md mb-10">
-      <h1 className="text-3xl font-extrabold text-pink-700 tracking-wide select-none">
-        🌸 Mom's Memory Keeper
-      </h1>
+    <header className="fixed top-0 left-0 right-0 z-50 w-full bg-white shadow-md py-4 px-6 flex justify-between items-center">
+      {/* Logo */}
+      <Link href="/" className="text-2xl font-bold text-pink-600">
+        Mamabloom
+      </Link>
 
-      <div className="relative" ref={dropdownRef}>
-        {/* Profile Button */}
-        <button
-          onClick={toggleDropdown}
-          aria-label="User menu"
-          className="w-12 h-12 rounded-full bg-pink-300 flex items-center justify-center text-pink-700 font-bold text-lg shadow-md hover:bg-pink-400 transition"
-        >
-          {user?.email?.charAt(0).toUpperCase() }
-        </button>
+      {/* Desktop Nav */}
+      <nav className="hidden md:flex space-x-4 items-center">
+        <Link href="/notes" className="text-pink-500 hover:text-pink-700 font-medium">
+          Journal
+        </Link>
+        <Link href="/chat" className="text-pink-500 hover:text-pink-700 font-medium">
+          Chat
+        </Link>
+        {user ? (
+          <>
+            <span className="text-gray-600 font-medium">{user.email}</span>
+            <button
+              onClick={handleLogout}
+              className="ml-2 bg-pink-500 hover:bg-pink-700 text-white px-3 py-1 rounded"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <Link href="/login" className="text-pink-500 hover:text-pink-700 font-medium">
+            Login
+          </Link>
+        )}
+      </nav>
 
-        {/* Dropdown Menu */}
-        {isOpen && (
-          <div className="absolute right-0 mt-3 w-52 bg-white rounded-lg shadow-lg border border-pink-200 z-50">
-            <div className="px-5 py-3 border-b border-pink-200 text-pink-700 font-semibold truncate">
-              {user?.email || 'User'}
-            </div>
-            <ul className="py-2 text-pink-600 text-sm">
-              <li className="px-5 py-2 hover:bg-pink-100 cursor-pointer">Profile</li>
-              <li className="px-5 py-2 hover:bg-pink-100 cursor-pointer">Settings</li>
-              <li
-                onClick={handleLogout}
-                className="px-5 py-2 hover:bg-red-100 text-red-500 cursor-pointer border-t border-pink-200"
+      {/* Mobile Hamburger */}
+      <button
+        className="md:hidden text-pink-600"
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        {menuOpen ? <X size={28} /> : <Menu size={28} />}
+      </button>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="absolute top-full left-0 w-full bg-white shadow-md md:hidden flex flex-col items-start px-6 py-4 space-y-3 z-40">
+          <Link
+            href="/journal"
+            onClick={() => setMenuOpen(false)}
+            className="text-pink-500 hover:text-pink-700 font-medium"
+          >
+            Journal
+          </Link>
+          <Link
+            href="/chat"
+            onClick={() => setMenuOpen(false)}
+            className="text-pink-500 hover:text-pink-700 font-medium"
+          >
+            Chat
+          </Link>
+          {user ? (
+            <>
+              <span className="text-gray-600 font-medium">{user.email}</span>
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setMenuOpen(false);
+                }}
+                className="bg-pink-500 hover:bg-pink-700 text-white px-3 py-1 rounded"
               >
                 Logout
-              </li>
-            </ul>
-          </div>
-        )}
-      </div>
+              </button>
+            </>
+          ) : (
+            <Link
+              href="/login"
+              onClick={() => setMenuOpen(false)}
+              className="text-pink-500 hover:text-pink-700 font-medium"
+            >
+              Login
+            </Link>
+          )}
+        </div>
+      )}
     </header>
   );
 }

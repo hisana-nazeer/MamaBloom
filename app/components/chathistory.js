@@ -19,6 +19,18 @@ export default function Chathistory({ onSelectChat }) {
       const chatList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setChats(chatList);
     };
+    // const fetchChats=async () =>{
+    //   const res = await fetch("/api/history",{
+    //     method:"POST",
+    //     headers:{'Content-Type':'application/json'},
+    //     body:JSON.stringify({uid:user.uid})
+    //   })
+    //   const data=await res.json()
+    //   console.log("Fetched chats:", data);
+    //   if(data.conversations){
+    //     setChats(data.conversations)
+    //   }
+    // }
 
     fetchChats();
   }, [user]);

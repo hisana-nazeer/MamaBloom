@@ -1,4 +1,9 @@
 // // app/api/chat/route.ts
+//Accepts a message from the user
+
+// Calls OpenAI
+// Encrypts the reply and title
+// Saves them to Firestore
 
 import { NextRequest, NextResponse } from 'next/server';
 import { openai } from '@/lib/openai';
@@ -11,9 +16,9 @@ import { collection, addDoc } from 'firebase/firestore';
 
 const  secretKey = process.env.CHAT_SECRET
 
-function encryptMessage(text) {
-  return CryptoJS.AES.encrypt(text, secretKey).toString()
-}
+// function encryptMessage(text) {
+//   return CryptoJS.AES.encrypt(text, secretKey).toString()
+// }
 
 
 export async function POST(req) {
@@ -57,17 +62,17 @@ Reply :<detailed answer>`
     const reply = replyMatch?.[1]?.trim() || 'Could not generate response';
 
   //Encrypt the reply
-   const encryptedUserMessage = encryptMessage(message);
-   const encryptedBotReply = encryptMessage(reply);
-   const encryptedTitle = encryptMessage(title);
+  //  const encryptedUserMessage = encryptMessage(message);
+  //  const encryptedBotReply = encryptMessage(reply);
+  //  const encryptedTitle = encryptMessage(title);
 
    // Save the conversation to Firestore under the given uid
   if (uid) {
     await addDoc(collection(db, 'users', uid, 'conversations'), {
-      encryptedTitle,
+      title,
       messages: [
-        { sender: 'user', text: encryptedUserMessage },
-        { sender: 'bot', text: encryptedBotReply }
+        { sender: 'user', text: message },
+        { sender: 'bot', text: reply }
       ],
       createdAt: serverTimestamp(),
     });
@@ -125,4 +130,3 @@ Reply :<detailed answer>`
 //     return NextResponse.json({ error: 'Failed to fetch reply' }, { status: 500 });
 //   }
 // }
-
