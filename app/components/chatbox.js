@@ -112,15 +112,16 @@ setMessages(tempMessages);
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-100 to-pink-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-2xl bg-white shadow-2xl rounded-3xl flex flex-col overflow-hidden border border-rose-200">
-        {/* Header */}
+    <div className="flex flex-col h-full bg-gradient-to-br from-pink-50 via-rose-100 to-pink-50">
+  <div className="flex flex-col flex-1 w-full max-w-4xl mx-auto bg-white shadow-2xl rounded-3xl overflow-hidden border border-rose-200">
+
         <div className="bg-rose-100 text-rose-800 px-6 py-4 text-center text-2xl font-extrabold tracking-wide rounded-t-3xl shadow">
           🌸 MamaBloom
         </div>
 
         {/* Chat Area */}
-        <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6 max-h-[70vh]">
+        <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
+
           {messages.map((msg, idx) => (
             <div
               key={idx}
@@ -157,7 +158,7 @@ setMessages(tempMessages);
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your question, mama 💬"
-            className="flex-1 border border-gray-300 rounded-full px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-rose-300"
+            className="text-black bg-white w-full px-4 py-2 rounded-lg border border-rose-300 focus:outline-none"
           />
           <button
             type="submit"
