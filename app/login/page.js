@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { signInWithEmailAndPassword, getRedirectResult signInWithPopup, signInWithRedirect } from 'firebase/auth';
 import { auth, provider } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
@@ -14,6 +14,15 @@ export default function Login() {
 
   const router = useRouter();
 
+  useEffect(() =>{
+    getRedirectResult(auth)
+    .then((result) => {
+      if (result?.user) {
+        console.log("User logged in with Google:", result.user);
+        router.push('/menu');
+      }
+  })
+
   const handleLogin = async (e) => {
     e.preventDefault();
     
@@ -22,7 +31,7 @@ export default function Login() {
       console.log("User logged in:", userCredential.user);
       router.push('/notes');
     } catch (error) {
-      console.error("Error logging in:", error);
+      // console.error("Error logging in:", error);
       if (
         error.code === 'auth/user-not-found' ||
         error.code === 'auth/wrong-password'
@@ -34,6 +43,8 @@ export default function Login() {
     }
   };
       // alert("Login failed: " + error.message);
+  const isMobile = typeof window !== 'undefined' && /Mobi|Android/i.test(navigator.userAgent);
+
   
   const setGoogleLogin = async () => {
     if (loading) return
@@ -41,6 +52,12 @@ export default function Login() {
     setLoading(true)
 
     try {
+      if(isMobile) {
+        await signInWithRedirect(AuthenticatorAssertionResponse, provider)
+      }
+      else {
+        await signInWithPopup(auth, provider);
+      }
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       router.push('/menu');
