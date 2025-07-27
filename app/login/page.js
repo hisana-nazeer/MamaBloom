@@ -1,6 +1,6 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { signInWithEmailAndPassword, getRedirectResult, signInWithPopup, signInWithRedirect } from 'firebase/auth';
+import { useState } from 'react';
+import { signInWithEmailAndPassword, signInWithPopup, signInWithRedirect } from 'firebase/auth';
 import { auth, provider } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
@@ -9,20 +9,21 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [errorMsg,setErrorMsg] = useState('');
 
 
   const router = useRouter();
-
-  useEffect(() =>{
-    getRedirectResult(auth)
+  useEffect(() => {
+  getRedirectResult(auth)
     .then((result) => {
       if (result?.user) {
-        console.log("User logged in with Google:", result.user);
+        console.log("User logged in with redirect:", result.user);
         router.push('/menu');
       }
+    })
+    .catch((error) => {
+      console.error("Redirect login failed:", error);
     });
-  }, [router]);
+}, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -32,7 +33,7 @@ export default function Login() {
       console.log("User logged in:", userCredential.user);
       router.push('/notes');
     } catch (error) {
-      // console.error("Error logging in:", error);
+      console.error("Error logging in:", error);
       if (
         error.code === 'auth/user-not-found' ||
         error.code === 'auth/wrong-password'
@@ -44,8 +45,6 @@ export default function Login() {
     }
   };
       // alert("Login failed: " + error.message);
-  const isMobile = typeof window !== 'undefined' && /Mobi|Android/i.test(navigator.userAgent);
-
   
   const setGoogleLogin = async () => {
     if (loading) return
@@ -53,18 +52,22 @@ export default function Login() {
     setLoading(true)
 
     try {
-      if(isMobile) {
-        await signInWithRedirect(auth, provider);
-      }
-      else {
-        
-      const result = await signInWithPopup(auth, provider);
+      if (typeof window !== 'undefined' && /Mobi|Android/i.test(navigator.userAgent)) {
+      // Use redirect on mobile
+      await signInWithRedirect(auth, provider);
+
+    }
+      else{
+        const result = await signInWithPopup(auth, provider);
       const user = result.user;
       router.push('/menu');
-      console.log("User logged in with Google:", user);
+      // console.log("User logged in with Google:", user);
     }} catch (error) {
       console.error("Error logging in with Google:", error);
-      setErrorMsg("User ID or Password is incorrect.");
+      // setErrorMsg("User ID or Password is incorrect.");
+      toast.error("Login with Google failed. Please try again.");
+    }finally {
+      setLoading(false);
     }
   };
 
