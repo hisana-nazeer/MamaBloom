@@ -53,7 +53,7 @@ export default function Header() {
       {menuOpen && (
         <div className="absolute top-full left-0 w-full bg-white shadow-md md:hidden flex flex-col items-start px-6 py-4 space-y-3 z-40">
           <Link
-            href="/journal"
+            href="/notes"
             onClick={() => setMenuOpen(false)}
             className="text-pink-500 hover:text-pink-700 font-medium"
           >

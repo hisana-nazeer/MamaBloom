@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword, getRedirectResult,signInWithPopup, signInWi
 import { auth, provider } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
+import { onAuthStateChanged, browserLocalPersistence, setPersistence } from 'firebase/auth';
 
 export default function Login() {
   const [email, setEmail] = useState('');
