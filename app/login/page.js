@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { signInWithEmailAndPassword, signInWithPopup, signInWithRedirect } from 'firebase/auth';
 import { auth, provider } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
@@ -52,7 +52,9 @@ export default function Login() {
     setLoading(true)
 
     try {
-      if (typeof window !== 'undefined' && /Mobi|Android/i.test(navigator.userAgent)) {
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (isMobile) {
+        // Use redirect on mobile
       // Use redirect on mobile
       await signInWithRedirect(auth, provider);
 
