@@ -12,21 +12,21 @@ export default function Login() {
 
 
   const router = useRouter();
-//   useEffect(() => {
-//   getRedirectResult(auth)
-//   //When the promise finishes successfully, here’s what to do with the result."
+  useEffect(() => {
+  getRedirectResult(auth)
+  //When the promise finishes successfully, here’s what to do with the result."
 
 
-//     .then((result) => {
-//       if (result?.user) {
-//         console.log("User logged in with redirect:", result.user);
-//         router.push('/menu');
-//       }
-//     })
-//     .catch((error) => {
-//       console.error("Redirect login failed:", error);
-//     });
-// }, []);
+    .then((result) => {
+      if (result?.user) {
+        console.log("User logged in with redirect:", result.user);
+        router.push('/menu');
+      }
+    })
+    .catch((error) => {
+      console.error("Redirect login failed:", error);
+    });
+}, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -49,33 +49,57 @@ export default function Login() {
   };
       // alert("Login failed: " + error.message);
   
+  // const setGoogleLogin = async () => {
+  //   if (loading) return
+
+  //   setLoading(true)
+
+    
+  //     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  //     if (isMobile) {
+  //       // Use redirect on mobile
+  //     // Use redirect on mobile
+  //     await signInWithRedirect(auth, provider);
+
+  //   }
+  //     else{
+  //      try {
+  //       const result = await signInWithPopup(auth, provider);
+  //     const user = result.user;
+  //     router.push('/menu');
+  //     // console.log("User logged in with Google:", user);
+  //   } catch (error) {
+  //     console.error("Error logging in with Google:", error);
+  //     // setErrorMsg("User ID or Password is incorrect.");
+  //     toast.error("Login with Google failed. Please try again.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   const setGoogleLogin = async () => {
-    if (loading) return
+  if (loading) return;
+  setLoading(true);
 
-    setLoading(true)
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-    //
-    //   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    //   if (isMobile) {
-    //     // Use redirect on mobile
-    //   // Use redirect on mobile
-    //   await signInWithRedirect(auth, provider);
-
-    // }
-    //   else{
-       try {
-        const result = await signInWithPopup(auth, provider);
+  try {
+    if (isMobile) {
+      // Mobile: use redirect
+      await signInWithRedirect(auth, provider);
+    } else {
+      // Desktop: use popup
+      const result = await signInWithPopup(auth, provider);
       const user = result.user;
       router.push('/menu');
-      // console.log("User logged in with Google:", user);
-    } catch (error) {
-      console.error("Error logging in with Google:", error);
-      // setErrorMsg("User ID or Password is incorrect.");
-      toast.error("Login with Google failed. Please try again.");
-    } finally {
-      setLoading(false);
     }
-  };
+  } catch (error) {
+    console.error("Error logging in with Google:", error);
+    toast.error("Login with Google failed. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-pink-50 px-4 py-8">
@@ -142,4 +166,5 @@ export default function Login() {
       </div>
     </div>
   );
+}
 }
