@@ -1,6 +1,6 @@
 'use client';
-import { useState } from 'react';
-import { signInWithEmailAndPassword, getRedirectResult signInWithPopup, signInWithRedirect } from 'firebase/auth';
+import { useState, useEffect } from 'react';
+import { signInWithEmailAndPassword, getRedirectResult, signInWithPopup, signInWithRedirect } from 'firebase/auth';
 import { auth, provider } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
@@ -21,7 +21,8 @@ export default function Login() {
         console.log("User logged in with Google:", result.user);
         router.push('/menu');
       }
-  })
+    });
+  }, [router]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -53,16 +54,15 @@ export default function Login() {
 
     try {
       if(isMobile) {
-        await signInWithRedirect(AuthenticatorAssertionResponse, provider)
+        await signInWithRedirect(auth, provider);
       }
       else {
-        await signInWithPopup(auth, provider);
-      }
+        
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       router.push('/menu');
       console.log("User logged in with Google:", user);
-    } catch (error) {
+    }} catch (error) {
       console.error("Error logging in with Google:", error);
       setErrorMsg("User ID or Password is incorrect.");
     }
