@@ -1,61 +1,66 @@
 'use client';
-
 import { useState, useEffect } from 'react';
+import { signInWithEmailAndPassword, getRedirectResult,signInWithPopup, signInWithRedirect } from 'firebase/auth';
+import { auth, provider } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
-import {
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  signInWithRedirect,
-  getRedirectResult,
-  onAuthStateChanged,
-} from 'firebase/auth';
-import { auth, provider } from '@/lib/firebase';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+
+
   const router = useRouter();
-
-  // Handle redirect result for mobile login
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, () => {
-      setTimeout(() => {
-        handleRedirect();
-      }, 500); // small delay to ensure Firebase is initialized
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  const handleRedirect = async () => {
+// useEffect(() => {
+//   getRedirectResult(auth)
+//     .then((result) => {
+//       if (result?.user) {
+//         router.push('/menu');
+//       } else if (auth.currentUser) {
+//         // Already logged in
+//         router.push('/menu');
+//       }
+//     })
+//     .catch((error) => {
+//       console.error("Redirect login failed:", error);
+//     });
+// }, []);
+useEffect(() => {
+    console.log("Checking redirect result...");
+  async function handleRedirect() {
     try {
-      console.log("Checking redirect result...");
       const result = await getRedirectResult(auth);
-      console.log("Redirect result:", result);
-
       if (result?.user) {
-        console.log("Redirect user:", result.user.email);
-        router.replace('/menu');
+        console.log("User from redirect:", result.user);
+        router.push('/menu');
       } else if (auth.currentUser) {
         console.log("Already signed in:", auth.currentUser.email);
-        router.replace('/menu');
+        router.push('/menu');
       } else {
-        console.log("No redirect user found.");
+        console.log("No user signed in yet.");
       }
     } catch (error) {
       console.error("Redirect login error:", error);
       toast.error("Login failed. Try again.");
     }
-  };
+  }
+
+  // Delay slightly to ensure auth context is fully loaded
+  setTimeout(() => {
+    handleRedirect();
+  }, 300);
+}, []);
+
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log("Email login success:", userCredential.user.email);
-      router.replace('/menu');
+      console.log("User logged in:", userCredential.user);
+      router.push('/menu');
     } catch (error) {
       console.error("Error logging in:", error);
       if (
@@ -68,31 +73,60 @@ export default function Login() {
       }
     }
   };
+      // alert("Login failed: " + error.message);
+  
+  // const setGoogleLogin = async () => {
+  //   if (loading) return
 
+  //   setLoading(true)
+
+    
+  //     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  //     if (isMobile) {
+  //       // Use redirect on mobile
+  //     // Use redirect on mobile
+  //     await signInWithRedirect(auth, provider);
+
+  //   }
+  //     else{
+  //      try {
+  //       const result = await signInWithPopup(auth, provider);
+  //     const user = result.user;
+  //     router.push('/menu');
+  //     // console.log("User logged in with Google:", user);
+  //   } catch (error) {
+  //     console.error("Error logging in with Google:", error);
+  //     // setErrorMsg("User ID or Password is incorrect.");
+  //     toast.error("Login with Google failed. Please try again.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   const setGoogleLogin = async () => {
-    if (loading) return;
-    setLoading(true);
+  if (loading) return;
+  setLoading(true);
 
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-    try {
-      if (isMobile) {
-        console.log("Mobile device detected – using redirect");
-        await signInWithRedirect(auth, provider);
-      } else {
-        const result = await signInWithPopup(auth, provider);
-        if (result?.user) {
-          console.log("Popup login success:", result.user.email);
-          router.replace('/menu');
-        }
+  try {
+    if (isMobile) {
+      console.log("Mobile detected - using redirect");
+      await signInWithRedirect(auth, provider);
+    } else {
+      const result = await signInWithPopup(auth, provider);
+      if (result?.user) {
+        console.log("Popup login success:", result.user.email);
+        router.push('/menu');
       }
-    } catch (error) {
-      console.error("Google login error:", error.code, error.message);
-      toast.error("Login failed. Try again.");
-    } finally {
-      setLoading(false);
     }
-  };
+  } catch (error) {
+    console.error("Google login error:", error.code, error.message);
+    toast.error("Login failed. Try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-pink-50 px-4 py-8">
@@ -116,7 +150,7 @@ export default function Login() {
             required
             className="w-full text-black px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
           />
-
+           
           <button
             type="submit"
             className="w-full bg-pink-500 hover:bg-pink-600 text-white py-3 rounded-lg font-semibold transition"
