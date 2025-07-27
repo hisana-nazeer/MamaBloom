@@ -12,21 +12,21 @@ export default function Login() {
 
 
   const router = useRouter();
-  useEffect(() => {
-  getRedirectResult(auth)
-  //When the promise finishes successfully, here’s what to do with the result."
+//   useEffect(() => {
+//   getRedirectResult(auth)
+//   //When the promise finishes successfully, here’s what to do with the result."
 
 
-    .then((result) => {
-      if (result?.user) {
-        console.log("User logged in with redirect:", result.user);
-        router.push('/menu');
-      }
-    })
-    .catch((error) => {
-      console.error("Redirect login failed:", error);
-    });
-}, []);
+//     .then((result) => {
+//       if (result?.user) {
+//         console.log("User logged in with redirect:", result.user);
+//         router.push('/menu');
+//       }
+//     })
+//     .catch((error) => {
+//       console.error("Redirect login failed:", error);
+//     });
+// }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -54,24 +54,25 @@ export default function Login() {
 
     setLoading(true)
 
-    try {
-      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-      if (isMobile) {
-        // Use redirect on mobile
-      // Use redirect on mobile
-      await signInWithRedirect(auth, provider);
+    //
+    //   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    //   if (isMobile) {
+    //     // Use redirect on mobile
+    //   // Use redirect on mobile
+    //   await signInWithRedirect(auth, provider);
 
-    }
-      else{
+    // }
+    //   else{
+       try {
         const result = await signInWithPopup(auth, provider);
       const user = result.user;
       router.push('/menu');
       // console.log("User logged in with Google:", user);
-    }} catch (error) {
+    } catch (error) {
       console.error("Error logging in with Google:", error);
       // setErrorMsg("User ID or Password is incorrect.");
       toast.error("Login with Google failed. Please try again.");
-    }finally {
+    } finally {
       setLoading(false);
     }
   };

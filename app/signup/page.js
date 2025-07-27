@@ -17,7 +17,7 @@ export default function Signup() {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       if (userCredential.user) {
       
-      toast.success("User signed up with Google successfully!");
+      
       Router.push('/login')
       }
     } catch (error) {
