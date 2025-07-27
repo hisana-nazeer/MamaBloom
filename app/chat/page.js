@@ -18,11 +18,10 @@ export default function Chat() {
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
         {/* Sidebar - Chat History */}
-        <aside className="w-full md:w-1/3 lg:w-1/4 bg-white border-b md:border-b-0 md:border-r border-rose-200 shadow-inner overflow-y-auto p-4 h-60 md:h-auto">
-
-          <h2 className="text-lg font-semibold text-rose-600 mb-4">Chat History</h2>
-          <Chathistory onSelectChat={setSelectedChat} />
-        </aside>
+        <aside className={`${showHistory ? 'block' : 'hidden'} md:block w-full md:w-1/3 lg:w-1/4 bg-white border-b md:border-b-0 md:border-r border-rose-200 shadow-inner overflow-y-auto p-4 h-60 md:h-auto`}>
+  <h2 className="text-lg font-semibold text-rose-600 mb-4">Chat History</h2>
+  <Chathistory onSelectChat={setSelectedChat} />
+</aside>
 
         {/* Main Chatbox */}
         <main className="w-full md:w-2/3 lg:w-3/4 p-4 overflow-y-auto flex flex-col flex-1">
