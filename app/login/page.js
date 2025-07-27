@@ -12,14 +12,13 @@ export default function Login() {
 
 
   const router = useRouter();
-  useEffect(() => {
+useEffect(() => {
   getRedirectResult(auth)
-  //When the promise finishes successfully, here’s what to do with the result."
-
-
     .then((result) => {
       if (result?.user) {
-        console.log("User logged in with redirect:", result.user);
+        router.push('/menu');
+      } else if (auth.currentUser) {
+        // Already logged in
         router.push('/menu');
       }
     })
@@ -27,6 +26,7 @@ export default function Login() {
       console.error("Redirect login failed:", error);
     });
 }, []);
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
