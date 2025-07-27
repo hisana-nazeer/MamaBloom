@@ -27,26 +27,18 @@ export default function Login() {
 //     });
 // }, []);
 useEffect(() => {
-  const unsubscribe = onAuthStateChanged(auth, async (user) => {
+  if (!auth) return;
+
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
     if (user) {
-      console.log("User signed in:", user.email);
+      console.log("User is signed in:", user.email);
       router.push('/menu');
-    } else {
-      try {
-        const result = await getRedirectResult(auth);
-        if (result?.user) {
-          console.log("User from redirect result:", result.user.email);
-          router.push('/menu');
-        }
-      } catch (error) {
-        console.error("Redirect login error:", error);
-        toast.error("Login failed. Try again.");
-      }
     }
   });
 
   return () => unsubscribe();
 }, []);
+
 
   // Delay slightly to ensure auth context is fully loaded
 //   setTimeout(() => {
