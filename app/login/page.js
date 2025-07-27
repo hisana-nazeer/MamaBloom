@@ -12,20 +12,45 @@ export default function Login() {
 
 
   const router = useRouter();
+// useEffect(() => {
+//   getRedirectResult(auth)
+//     .then((result) => {
+//       if (result?.user) {
+//         router.push('/menu');
+//       } else if (auth.currentUser) {
+//         // Already logged in
+//         router.push('/menu');
+//       }
+//     })
+//     .catch((error) => {
+//       console.error("Redirect login failed:", error);
+//     });
+// }, []);
 useEffect(() => {
-  getRedirectResult(auth)
-    .then((result) => {
+  async function handleRedirect() {
+    try {
+      const result = await getRedirectResult(auth);
       if (result?.user) {
+        console.log("User from redirect:", result.user);
         router.push('/menu');
       } else if (auth.currentUser) {
-        // Already logged in
+        console.log("Already signed in:", auth.currentUser.email);
         router.push('/menu');
+      } else {
+        console.log("No user signed in yet.");
       }
-    })
-    .catch((error) => {
-      console.error("Redirect login failed:", error);
-    });
+    } catch (error) {
+      console.error("Redirect login error:", error);
+      toast.error("Login failed. Try again.");
+    }
+  }
+
+  // Delay slightly to ensure auth context is fully loaded
+  setTimeout(() => {
+    handleRedirect();
+  }, 300);
 }, []);
+
 
 
   const handleLogin = async (e) => {
