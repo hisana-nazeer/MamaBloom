@@ -4,6 +4,7 @@ import { auth, provider } from '@/lib/firebase';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '../components/header';
+import { toast } from 'react-hot-toast';
 
 export default function Signup() {
   const [email, setEmail] = useState('');
@@ -32,7 +33,7 @@ export default function Signup() {
       alert("User signed up with Google successfully!");
      if (userCredential.user) {
       
-      alert("User signed up successfully!");
+     toast.success("User signed up with Google successfully!");
       Router.push('/login')
       }
     

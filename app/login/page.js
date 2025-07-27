@@ -14,6 +14,9 @@ export default function Login() {
   const router = useRouter();
   useEffect(() => {
   getRedirectResult(auth)
+  //When the promise finishes successfully, here’s what to do with the result."
+
+
     .then((result) => {
       if (result?.user) {
         console.log("User logged in with redirect:", result.user);
