@@ -109,17 +109,18 @@ useEffect(() => {
 
   try {
     if (isMobile) {
-      // Mobile: use redirect
+      console.log("Mobile detected - using redirect");
       await signInWithRedirect(auth, provider);
     } else {
-      // Desktop: use popup
       const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      router.push('/menu');
+      if (result?.user) {
+        console.log("Popup login success:", result.user.email);
+        router.push('/menu');
+      }
     }
   } catch (error) {
-    console.error("Error logging in with Google:", error);
-    toast.error("Login with Google failed. Please try again.");
+    console.error("Google login error:", error.code, error.message);
+    toast.error("Login failed. Try again.");
   } finally {
     setLoading(false);
   }
