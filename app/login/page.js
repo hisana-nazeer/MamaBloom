@@ -3,25 +3,38 @@ import { useState } from 'react';
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-hot-toast';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [errorMsg,setErrorMsg] = useState('');
+
+
   const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("User logged in:", userCredential.user);
       router.push('/notes');
     } catch (error) {
       console.error("Error logging in:", error);
-      alert("Login failed: " + error.message);
+      if (
+        error.code === 'auth/user-not-found' ||
+        error.code === 'auth/wrong-password'
+      ) {
+        toast.error("User ID or password is incorrect.");
+      } else {
+        toast.error("Login failed. Please try again.");
+      }
     }
   };
-
+      // alert("Login failed: " + error.message);
+  
   const setGoogleLogin = async () => {
     if (loading) return
 
@@ -34,7 +47,7 @@ export default function Login() {
       console.log("User logged in with Google:", user);
     } catch (error) {
       console.error("Error logging in with Google:", error);
-      alert("Login failed: " + error.message);
+      setErrorMsg("User ID or Password is incorrect.");
     }
   };
 
@@ -60,6 +73,7 @@ export default function Login() {
             required
             className="w-full text-black px-4 py-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
           />
+           
           <button
             type="submit"
             className="w-full bg-pink-500 hover:bg-pink-600 text-white py-3 rounded-lg font-semibold transition"
