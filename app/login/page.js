@@ -60,7 +60,7 @@ useEffect(() => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("User logged in:", userCredential.user);
-      router.push('/menu');
+      router.replace('/menu');
     } catch (error) {
       console.error("Error logging in:", error);
       if (
