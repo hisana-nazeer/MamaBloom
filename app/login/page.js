@@ -27,30 +27,32 @@ export default function Login() {
 //     });
 // }, []);
 useEffect(() => {
-    console.log("Checking redirect result...");
-  async function handleRedirect() {
-    try {
-      const result = await getRedirectResult(auth);
-      if (result?.user) {
-        console.log("User from redirect:", result.user);
-        router.push('/menu');
-      } else if (auth.currentUser) {
-        console.log("Already signed in:", auth.currentUser.email);
-        router.push('/menu');
-      } else {
-        console.log("No user signed in yet.");
+  const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      console.log("User signed in:", user.email);
+      router.push('/menu');
+    } else {
+      try {
+        const result = await getRedirectResult(auth);
+        if (result?.user) {
+          console.log("User from redirect result:", result.user.email);
+          router.push('/menu');
+        }
+      } catch (error) {
+        console.error("Redirect login error:", error);
+        toast.error("Login failed. Try again.");
       }
-    } catch (error) {
-      console.error("Redirect login error:", error);
-      toast.error("Login failed. Try again.");
     }
-  }
+  });
+
+  return () => unsubscribe();
+}, []);
 
   // Delay slightly to ensure auth context is fully loaded
-  setTimeout(() => {
-    handleRedirect();
-  }, 300);
-}, []);
+//   setTimeout(() => {
+//     handleRedirect();
+//   }, 300);
+// }, []);
 
 
 
@@ -60,7 +62,7 @@ useEffect(() => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("User logged in:", userCredential.user);
-      router.replace('/menu');
+      router.push('/menu');
     } catch (error) {
       console.error("Error logging in:", error);
       if (
