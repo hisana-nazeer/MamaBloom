@@ -68,7 +68,7 @@ It's not just an app — it's a small act of empathy powered by technology.
 
 **Built by Hisana Nazeer.**  
 Open to collaborations, feedback, or just a kind chat 🌷  
-[Your LinkedIn or GitHub link here]
+https://www.linkedin.com/in/hisana-nazeer/
 
 
 
