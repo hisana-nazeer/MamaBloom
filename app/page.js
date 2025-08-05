@@ -3,12 +3,13 @@
 import Link from 'next/link';
 import React from 'react';
 
+
 export default function Home() {
   return (
     <main className="bg-white text-gray-900 font-sans">
       {/* Header Navigation */}
       <header className="w-full px-6 py-4 flex items-center justify-between shadow-sm bg-white fixed top-0 z-50">
-        <h1 className="text-2xl font-bold text-pink-600">Mombloom</h1>
+        <h1 className="text-2xl font-bold text-pink-600">Mamabloom</h1>
         <Link href="/login" className="text-pink-600 font-medium hover:text-pink-700 transition">
           Log In
         </Link>
@@ -17,8 +18,8 @@ export default function Home() {
       {/* Hero Section */}
       <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 py-32 md:py-48 bg-gradient-to-br from-pink-100 via-white to-pink-50">
         <h2 className="text-5xl md:text-7xl font-extrabold leading-tight text-pink-700 mb-6">
-          Empowering Mothers
-          <br />One Journal Entry at a Time
+         Every baby brings a new mom into the world – Empowering Mothers
+         
         </h2>
         <p className="text-xl md:text-2xl max-w-2xl text-gray-700 mb-10">
           A private space for new moms to reflect, breathe, and talk with a kind AI companion.
@@ -44,7 +45,7 @@ export default function Home() {
         </div>
         <div className="rounded-xl overflow-hidden shadow-lg">
           <img
-            src="/images/mombloom-preview.jpg"
+            src="/images/mombloom-preview.png"
             alt="Mom using Mombloom"
             className="w-full h-full object-cover"
           />

@@ -52,7 +52,7 @@ export default function MenuPage() {
           >
             <h2 className="text-xl font-semibold text-pink-600 mb-2">Daily Journal</h2>
             <p className="text-gray-600">
-              Reflect and write about your day-to-day pregnancy journey.
+              Reflect and write about your day-to-day motherhood journey.
             </p>
           </Link>
         </div>

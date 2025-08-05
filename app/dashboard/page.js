@@ -72,7 +72,7 @@ export default function Dashboard() {
     <div className="min-h-screen bg-pink-50 px-4 py-6">
       <Header />
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl text-center font-extrabold text-pink-700 mb-6">🌸 Mom's Memory Keeper</h1>
+        <h1 className="text-3xl text-center font-extrabold text-pink-700 mb-6">🌸My Journal Shelf</h1>
 
         {loading && <p className="text-center text-pink-500">Loading your special notes...</p>}
         {error && <p className="text-center text-red-500">{error}</p>}

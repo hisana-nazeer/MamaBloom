@@ -12,7 +12,7 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full bg-white shadow-md py-4 px-6 flex justify-between items-center">
       {/* Logo */}
-      <Link href="/" className="text-2xl font-bold text-pink-600">
+      <Link href="/menu" className="text-2xl font-bold text-pink-600">
         Mamabloom
       </Link>
 

@@ -72,14 +72,14 @@ export default function Signup() {
             Sign Up
           </button>
         </form>
-        <h2 className="text-center text-gray-500 mt-6 mb-4 font-semibold">OR</h2>
+        {/* <h2 className="text-center text-gray-500 mt-6 mb-4 font-semibold">OR</h2>
         <button
           type="button"
           onClick={handleGoogleSignup}
           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition"
         >
           Sign Up with Google
-        </button>
+        </button> */}
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { auth, provider } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { onAuthStateChanged, browserLocalPersistence, setPersistence } from 'firebase/auth';
+import Header from '../components/header';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -13,32 +14,21 @@ export default function Login() {
 
 
   const router = useRouter();
-// useEffect(() => {
-//   getRedirectResult(auth)
-//     .then((result) => {
-//       if (result?.user) {
-//         router.push('/menu');
-//       } else if (auth.currentUser) {
-//         // Already logged in
-//         router.push('/menu');
-//       }
-//     })
-//     .catch((error) => {
-//       console.error("Redirect login failed:", error);
-//     });
-// }, []);
 useEffect(() => {
-  if (!auth) return;
-
-  const unsubscribe = onAuthStateChanged(auth, (user) => {
-    if (user) {
-      console.log("User is signed in:", user.email);
-      router.push('/menu');
-    }
-  });
-
-  return () => unsubscribe();
+  getRedirectResult(auth)
+    .then((result) => {
+      if (result?.user) {
+        console.log("User logged in with redirect:", result.user.email);
+        router.push('/menu');
+      } })
+    .catch((error) => {
+      // This error is expected if there's no redirect result
+      if (error.code !== 'auth/no-auth-event') {
+        console.error("Redirect login failed:", error);
+      }
+    });
 }, []);
+
 
 
   // Delay slightly to ensure auth context is fully loaded
@@ -124,6 +114,8 @@ useEffect(() => {
 
 
   return (
+    <>
+    <Header/>
     <div className="min-h-screen flex items-center justify-center bg-pink-50 px-4 py-8">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8">
         <h1 className="text-3xl font-extrabold text-pink-700 mb-8 text-center">🌸 Welcome Back!</h1>
@@ -154,13 +146,13 @@ useEffect(() => {
           </button>
         </form>
 
-        <div className="my-6 flex items-center justify-center space-x-4">
+        {/* <div className="my-6 flex items-center justify-center space-x-4">
           <hr className="w-1/3 border-pink-200" />
           <span className="text-pink-400 font-semibold">OR</span>
           <hr className="w-1/3 border-pink-200" />
-        </div>
+        </div> */}
 
-        <button
+        {/* <button
           type="button"
           onClick={setGoogleLogin}
           className="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg font-semibold transition flex items-center justify-center gap-2"
@@ -177,7 +169,7 @@ useEffect(() => {
             />
           </svg>
           Sign In with Google
-        </button>
+        </button> */}
 
         <p className="mt-6 text-center text-sm text-gray-600">
           Don't have an account?{' '}
@@ -187,5 +179,6 @@ useEffect(() => {
         </p>
       </div>
     </div>
+    </>
   );
 }
