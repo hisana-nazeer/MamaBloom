@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 👶 MamaBloom – AI-Powered Support for New Mothers 💬✨
 
-## Getting Started
+*A warm space for new moms to record their journey and ask any question — without judgment.*
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 🌸 Imagine this:
+👉 You sign in to a peaceful space, just for you  
+👉 Capture your thoughts, memories, and emotions in a private journal  
+👉 Ask anything — and receive kind, helpful answers from an AI designed to support new moms with care and understanding  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**That’s MamaBloom.**  
+Built with care to support moms when they need it most.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔍 Tech Stack Highlights
 
-## Learn More
+- **Frontend:** Next.js 13, React, Tailwind CSS  
+- **Backend & Infra:** Firebase (Firestore, Auth)  
+- **AI Integration:** OpenAI GPT-4.5 (Chatbot for new moms)  
+- **Styling:** Tailwind CSS  
+- **Deployment:** Vercel  
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 💡 Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 📝 **Mom Diary** – Private journaling space for daily logs  
+- 🤖 **Ask AI** – A friendly, non-judgmental AI chat interface  
+- 💗 **Minimal UI** – Clean, soothing interface with soft color tones  
+- 📱 **Responsive Design** – Mobile-first experience  
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🎯 Why I Built This
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+As a full stack developer, I wanted to build something meaningful.  
+**MamaBloom** was created to help new mothers feel supported, heard, and safe in their journey of sacred motherhood.
+
+It's not just an app — it's a small act of empathy powered by technology.
+
+---
+
+## 📂 Future Plans
+
+- 🧠 **AI Fine-Tuning**  
+  Train the AI chatbot on verified maternal health datasets to provide more context-aware, reliable, and safe answers tailored to postpartum needs.
+
+- ⏰ **Reminders & Notifications**  
+  Add personalized reminders for journaling, hydration, baby feeding, self-care, and mental health check-ins to support daily routines.
+
+- 🔊 **Voice Input**  
+  Enable voice-based interaction so moms can log diary entries or ask questions without typing—especially useful during busy hands-on moments.
+
+- 🧘 **Wellness Integrations**  
+  Integrate mindfulness tools such as guided meditations, breathing exercises, and short wellness breaks to promote emotional balance.
+
+- 📚 **Resource Library**  
+  Build a curated library of articles, expert videos, and tips covering postpartum recovery, baby care, mental health, and more.
+
+- 🧪 **A/B Testing AI Prompts**  
+  Continuously improve chatbot tone, empathy, and helpfulness by testing different prompt engineering strategies in real use cases.
+
+---
+
+## 🤝 Let's Connect
+
+**Built by Hisana Nazeer.**  
+Open to collaborations, feedback, or just a kind chat 🌷  
+https://www.linkedin.com/in/hisana-nazeer/
+
+
+
+
+
+
+
+
+
