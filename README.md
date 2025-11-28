@@ -31,14 +31,17 @@ MamaBloom is a mobile-friendly AI chat companion designed specifically for new m
 
 | Home Screen                      | Chat Screen                      | Login Screen                      |
 | -------------------------------- | -------------------------------- | --------------------------------- |
-| ![](public/screenshots/home.png) | ![](public/screenshots/chat.png) | ![](public/screenshots/login.png) |
+|<img width="3200" height="1717" alt="Screenshot (1780)" src="https://github.com/user-attachments/assets/34adac1d-5d4c-4acb-b261-3d9f5815f29a" />
+ | <img width="3200" height="1683" alt="Screenshot (1644)" src="https://github.com/user-attachments/assets/21900c24-1b58-42f0-9fbf-2cb9ac2e5f79" />
+ ![1754396811222](https://github.com/user-attachments/assets/d8f6a621-3a21-47c7-b6fd-56dcd0744d76)
+
 
 ---
 
 ## 🎥 Demo Link
 
 **Live Demo:**
-👉 [https://your-deployed-vercel-app.vercel.app](https://your-deployed-vercel-app.vercel.app)
+👉 (mamabloom.vercel.app)
 
 ---
 
@@ -109,30 +112,7 @@ Visit:
 
 ---
 
-## 🗺 Roadmap
 
-**Phase 1 – Now**
-
-* AI chat companion
-* Login system
-* Chat history
-* Responsive UI
-
-**Phase 2 – In Progress**
-
-* Mood tracking
-* Daily affirmation generator
-* Voice-based chat
-* Profile customization
-
-**Phase 3 – Future**
-
-* Therapist-approved guidance packs
-* Baby-tracking tools
-* Encrypted cloud backup
-* Multilingual support
-
----
 
 ## ❤️ Built for Mothers Everywhere
 
@@ -140,11 +120,6 @@ MamaBloom is created with the belief that no mother should feel alone on her jou
 This project continues to evolve — improving support, understanding, and comfort for moms across the world.
 
 ---
-
-
-
-
-
 ---
 
 ## 📂 Future Plans
