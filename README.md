@@ -27,12 +27,9 @@ MamaBloom is a mobile-friendly AI chat companion designed specifically for new m
 
 ## 📸 Screenshots
 
-> **Add your images in the `/public/screenshots` folder and update paths below.**
 
-| Home Screen                      | Chat Screen                      | Login Screen                      |
-| -------------------------------- | -------------------------------- | --------------------------------- |
-|<img width="3200" height="1717" alt="Screenshot (1780)" src="https://github.com/user-attachments/assets/34adac1d-5d4c-4acb-b261-3d9f5815f29a" />
- | <img width="3200" height="1683" alt="Screenshot (1644)" src="https://github.com/user-attachments/assets/21900c24-1b58-42f0-9fbf-2cb9ac2e5f79" />
+<img width="3200" height="1717" alt="Screenshot (1780)" src="https://github.com/user-attachments/assets/34adac1d-5d4c-4acb-b261-3d9f5815f29a" 
+<img width="3200" height="1683" alt="Screenshot (1644)" src="https://github.com/user-attachments/assets/21900c24-1b58-42f0-9fbf-2cb9ac2e5f79" 
  ![1754396811222](https://github.com/user-attachments/assets/d8f6a621-3a21-47c7-b6fd-56dcd0744d76)
 
 
@@ -40,10 +37,9 @@ MamaBloom is a mobile-friendly AI chat companion designed specifically for new m
 
 ## 🎥 Demo Link
 
-**Live Demo:**
-👉 (mamabloom.vercel.app)
+**Live Demo:**  
+[Click here to open MamaBloom](https://mamabloom.vercel.app)
 
----
 
 ## 🛠 Tech Stack
 
