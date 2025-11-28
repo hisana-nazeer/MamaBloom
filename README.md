@@ -1,8 +1,3 @@
-Here comes a **clean, startup-style README** written exactly in the format you requested.
-Fully professional, public-friendly, and ready to paste into GitHub.
-
----
-
 # 🌸 MamaBloom – Your AI Companion for Motherhood
 
 *A gentle, private space for new moms to talk, reflect, and feel supported.*
@@ -146,55 +141,9 @@ This project continues to evolve — improving support, understanding, and comfo
 
 ---
 
-If you'd like, I can also create:
 
-📌 README banner
-📌 Tech-stack badges
-📌 A polished logo for "MamaBloom"
-📌 Updated screenshot placeholders
-📌 A LICENSE file
 
-# 👶 MamaBloom – AI-Powered Support for New Mothers 💬✨
 
-*A warm space for new moms to record their journey and ask any question — without judgment.*
-
----
-
-### 🌸 Imagine this:
-👉 You sign in to a peaceful space, just for you  
-👉 Capture your thoughts, memories, and emotions in a private journal  
-👉 Ask anything — and receive kind, helpful answers from an AI designed to support new moms with care and understanding  
-
-**That’s MamaBloom.**  
-Built with care to support moms when they need it most.
-
----
-
-## 🔍 Tech Stack Highlights
-
-- **Frontend:** Next.js 13, React, Tailwind CSS  
-- **Backend & Infra:** Firebase (Firestore, Auth)  
-- **AI Integration:** OpenAI GPT-4.5 (Chatbot for new moms)  
-- **Styling:** Tailwind CSS  
-- **Deployment:** Vercel  
-
----
-
-## 💡 Features
-
-- 📝 **Mom Diary** – Private journaling space for daily logs  
-- 🤖 **Ask AI** – A friendly, non-judgmental AI chat interface  
-- 💗 **Minimal UI** – Clean, soothing interface with soft color tones  
-- 📱 **Responsive Design** – Mobile-first experience  
-
----
-
-## 🎯 Why I Built This
-
-As a full stack developer, I wanted to build something meaningful.  
-**MamaBloom** was created to help new mothers feel supported, heard, and safe in their journey of sacred motherhood.
-
-It's not just an app — it's a small act of empathy powered by technology.
 
 ---
 
